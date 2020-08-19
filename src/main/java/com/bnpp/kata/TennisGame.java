@@ -19,9 +19,9 @@ public class TennisGame {
         String currentGameScore;
 
         if(firstPlayerTranslatedScore.equalsIgnoreCase(secondPlayerTranslatedScore))
-            currentGameScore = firstPlayerTranslatedScore + " " + TennisConstants.TXT_ALL;
+            currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + TennisConstants.TXT_ALL;
         else
-            currentGameScore = firstPlayerTranslatedScore + ":"+secondPlayerTranslatedScore;
+            currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
 
         return currentGameScore;
     }

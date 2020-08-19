@@ -30,7 +30,7 @@ public class TennisGameTest{
 
     @Test
     public void initialScoreShouldBeLoveAll() {
-        Assert.assertEquals(TennisConstants.SCORE_LOVE + TennisConstants.SPACE_CHAR +TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
+        Assert.assertEquals(TennisConstants.SCORE_LOVE + TennisConstants.COLON +TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class TennisGameTest{
         tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
         tennisGame.getCurrentGameScore();
 
-        Assert.assertEquals(TennisConstants.SCORE_LOVE+":"+TennisConstants.SCORE_FIFTEEN,tennisGame.getCurrentGameScore());
+        Assert.assertEquals(TennisConstants.SCORE_LOVE+ TennisConstants.COLON +TennisConstants.SCORE_FIFTEEN,tennisGame.getCurrentGameScore());
     }
 
     @Test
@@ -61,6 +61,6 @@ public class TennisGameTest{
         tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
         tennisGame.getCurrentGameScore();
 
-        Assert.assertEquals(TennisConstants.SCORE_FIFTEEN+TennisConstants.SPACE_CHAR+TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
+        Assert.assertEquals(TennisConstants.SCORE_FIFTEEN+ TennisConstants.COLON +TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
     }
 }

@@ -10,4 +10,5 @@ public class TennisConstants {
     public static final int ONE_POINT = 1;
 
     public static final String SPACE_CHAR = " ";
+    public static final String COLON = ":";
 }
