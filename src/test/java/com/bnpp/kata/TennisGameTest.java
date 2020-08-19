@@ -24,4 +24,9 @@ public class TennisGameTest{
         Assert.assertEquals("Serena Williams", tennisGame.getNameOfPlayerOne());
         Assert.assertEquals("Maria Sharapova", tennisGame.getNameOfPlayerTwo());
     }
+
+    @Test
+    public void initialScoreShouldBeLoveAll() {
+        Assert.assertEquals("Love All",tennisGame.getCurrentGameScore());
+    }
 }

@@ -9,6 +9,10 @@ public class TennisGame {
         this.nameOfPlayerTwo = nameOfPlayerTwo;
     }
 
+    public String getCurrentGameScore() {
+        return "Love All";
+    }
+
     public String getNameOfPlayerOne() {
         return nameOfPlayerOne;
     }
