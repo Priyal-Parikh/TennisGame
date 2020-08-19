@@ -14,7 +14,27 @@ public class TennisGame {
     }
 
     public String getCurrentGameScore() {
-        return TennisConstants.SCORE_LOVE + " " + TennisConstants.TXT_ALL;
+        String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
+        String secondPlayerTranslatedScore=translateScoreInWord(getPointsScoredBySecondPlayer());
+        String currentGameScore;
+
+        if(firstPlayerTranslatedScore.equalsIgnoreCase(secondPlayerTranslatedScore))
+            currentGameScore = firstPlayerTranslatedScore + " " + TennisConstants.TXT_ALL;
+        else
+            currentGameScore = firstPlayerTranslatedScore + ":"+secondPlayerTranslatedScore;
+
+        return currentGameScore;
+    }
+
+    private String translateScoreInWord(int score) {
+        String translatedScore="";
+
+        if (score == TennisConstants.ZERO_POINT) {
+            translatedScore = TennisConstants.SCORE_LOVE;
+        } else if (score == TennisConstants.ONE_POINT) {
+            translatedScore = TennisConstants.SCORE_FIFTEEN;
+        }
+        return translatedScore;
     }
 
     public void increaseAPointForPlayer(String pointWinnerPlayer) {

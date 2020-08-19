@@ -46,4 +46,12 @@ public class TennisGameTest{
 
         Assert.assertEquals(TennisConstants.ONE_POINT,tennisGame.getPointsScoredBySecondPlayer());
     }
+
+    @Test
+    public void scoreShouldBeLoveFifteenIfSecondPlayerScoresPoint() {
+        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
+        tennisGame.getCurrentGameScore();
+
+        Assert.assertEquals(TennisConstants.SCORE_LOVE+":"+TennisConstants.SCORE_FIFTEEN,tennisGame.getCurrentGameScore());
+    }
 }
