@@ -32,4 +32,11 @@ public class TennisGameTest{
     public void initialScoreShouldBeLoveAll() {
         Assert.assertEquals(TennisConstants.SCORE_LOVE +" "+TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
     }
+
+    @Test
+    public void firstPlayerScoreShouldIncreaseAfterWinningAPoint() {
+        tennisGame.increaseAPointForFirstPlayer();
+
+        Assert.assertEquals(1,tennisGame.getPointsScoredByFirstPlayer());
+    }
 }
