@@ -17,12 +17,11 @@ public class TennisGame {
         return TennisConstants.SCORE_LOVE + " " + TennisConstants.TXT_ALL;
     }
 
-    public void increaseAPointForFirstPlayer() {
-        pointsScoredByFirstPlayer++;
-    }
-
-    public void increaseAPointForSecondPlayer() {
-        pointsScoredBySecondPlayer++;
+    public void increaseAPointForPlayer(String pointWinnerPlayer) {
+        if(pointWinnerPlayer.equalsIgnoreCase(getNameOfPlayerOne()))
+            pointsScoredByFirstPlayer++;
+        else if(pointWinnerPlayer.equalsIgnoreCase(getNameOfPlayerTwo()))
+            pointsScoredBySecondPlayer++;
     }
 
     public String getNameOfPlayerOne() {
