@@ -17,19 +17,27 @@ public class TennisGame {
         if(checkForDeuce())
             return TennisConstants.SCORE_DEUCE;
 
-        if((pointsScoredByFirstPlayer>TennisConstants.THREE_POINT || pointsScoredBySecondPlayer>TennisConstants.THREE_POINT) && (pointsScoredBySecondPlayer-pointsScoredByFirstPlayer==TennisConstants.ONE_POINT))
+        if(hasAnyPlayerScoreBeyondForty() && (pointsScoredBySecondPlayer-pointsScoredByFirstPlayer==TennisConstants.ONE_POINT))
             return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+nameOfPlayerTwo;
 
         String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
         String secondPlayerTranslatedScore=translateScoreInWord(getPointsScoredBySecondPlayer());
         String currentGameScore;
 
-        if(firstPlayerTranslatedScore.equalsIgnoreCase(secondPlayerTranslatedScore))
+        if(isSamePointsScored(firstPlayerTranslatedScore, secondPlayerTranslatedScore))
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + TennisConstants.TXT_ALL;
         else
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
 
         return currentGameScore;
+    }
+
+    private boolean isSamePointsScored(String firstPlayerTranslatedScore, String secondPlayerTranslatedScore) {
+        return firstPlayerTranslatedScore.equalsIgnoreCase(secondPlayerTranslatedScore);
+    }
+
+    private boolean hasAnyPlayerScoreBeyondForty() {
+        return pointsScoredByFirstPlayer > TennisConstants.THREE_POINT || pointsScoredBySecondPlayer > TennisConstants.THREE_POINT;
     }
 
     private boolean checkForDeuce() {
