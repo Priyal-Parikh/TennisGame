@@ -14,7 +14,7 @@ public class TennisGame {
     }
 
     public String getCurrentGameScore() {
-        if(getPointsScoredByFirstPlayer()>TennisConstants.THREE_POINT && getPointsScoredByFirstPlayer()==getPointsScoredBySecondPlayer())
+        if(checkForDeuce())
             return TennisConstants.SCORE_DEUCE;
 
         String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
@@ -27,6 +27,10 @@ public class TennisGame {
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
 
         return currentGameScore;
+    }
+
+    private boolean checkForDeuce() {
+        return getPointsScoredByFirstPlayer() > TennisConstants.THREE_POINT && getPointsScoredByFirstPlayer() == getPointsScoredBySecondPlayer();
     }
 
     private String translateScoreInWord(int score) {
