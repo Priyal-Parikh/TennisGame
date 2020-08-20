@@ -1,12 +1,16 @@
 package com.bnpp.kata;
 
 import com.bnpp.kata.constants.TennisConstants;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNotNull;
 
+@RunWith(JUnitParamsRunner.class)
 public class TennisGameTest{
     public static final String NAME_OF_FIRST_PLAYER = "Serena Williams";
     public static final String NAME_OF_SECOND_PLAYER = "Maria Sharapova";
@@ -72,11 +76,21 @@ public class TennisGameTest{
     }
 
     @Test
-    public void scoreShouldBeFortyLoveWhenFirstPlayerScoresAllFourPointsFirst() {
-        prepareScoreCard(TennisConstants.THREE_POINT,TennisConstants.ZERO_POINT);
-        tennisGame.getCurrentGameScore();
+    @Parameters({
+            "1, 0, Fifteen:Love",
+            "1, 1, Fifteen:All",
+            "2, 0, Thirty:Love",
+            "3, 1, Forty:Fifteen",
+            "3, 2, Forty:Thirty",
+            "0, 3, Love:Forty",
+            "1, 3, Fifteen:Forty",
+            "2, 3, Thirty:Forty",
+            "3, 3, Forty:All"
+    })
+    public void outputScoreShouldBeAsPerParametersPassed(int firstPlayerPoints,int secondPlayerPoints, String currentGameScore) {
+        prepareScoreCard(firstPlayerPoints,secondPlayerPoints);
 
-        Assert.assertEquals(TennisConstants.SCORE_FORTY+ TennisConstants.COLON +TennisConstants.SCORE_LOVE,tennisGame.getCurrentGameScore());
+        Assert.assertEquals(currentGameScore,tennisGame.getCurrentGameScore());
     }
 
     private void prepareScoreCard(int firstPlayerPoints, int secondPlayerPoints) {
