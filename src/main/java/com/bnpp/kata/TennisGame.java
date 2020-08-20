@@ -14,6 +14,9 @@ public class TennisGame {
     }
 
     public String getCurrentGameScore() {
+        if(getPointsScoredByFirstPlayer()>TennisConstants.THREE_POINT && getPointsScoredByFirstPlayer()==getPointsScoredBySecondPlayer())
+            return TennisConstants.SCORE_DEUCE;
+
         String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
         String secondPlayerTranslatedScore=translateScoreInWord(getPointsScoredBySecondPlayer());
         String currentGameScore;
