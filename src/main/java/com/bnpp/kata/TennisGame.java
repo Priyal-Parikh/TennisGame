@@ -20,6 +20,9 @@ public class TennisGame {
         if(hasAnyPlayerScoreBeyondForty() && (pointsScoredBySecondPlayer-pointsScoredByFirstPlayer==TennisConstants.ONE_POINT))
             return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+nameOfPlayerTwo;
 
+        if(hasAnyPlayerScoreBeyondForty() && (pointsScoredByFirstPlayer-pointsScoredBySecondPlayer==TennisConstants.ONE_POINT))
+            return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+nameOfPlayerOne;
+
         String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
         String secondPlayerTranslatedScore=translateScoreInWord(getPointsScoredBySecondPlayer());
         String currentGameScore;
