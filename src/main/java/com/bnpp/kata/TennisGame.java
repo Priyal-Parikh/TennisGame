@@ -18,10 +18,10 @@ public class TennisGame {
             return TennisConstants.SCORE_DEUCE;
 
         if(checkForAdvantage())
-            return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+(pointsScoredByFirstPlayer>pointsScoredBySecondPlayer?nameOfPlayerOne:nameOfPlayerTwo);
+            return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+(getPlayerWithHighScore());
 
         if (checkForWinner()) {
-            return TennisConstants.SCORE_WINS+TennisConstants.COLON+(pointsScoredByFirstPlayer>pointsScoredBySecondPlayer?nameOfPlayerOne:nameOfPlayerTwo);
+            return TennisConstants.SCORE_WINS+TennisConstants.COLON+ getPlayerWithHighScore();
         }
 
         String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
@@ -34,6 +34,10 @@ public class TennisGame {
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
 
         return currentGameScore;
+    }
+
+    private String getPlayerWithHighScore() {
+        return pointsScoredByFirstPlayer > pointsScoredBySecondPlayer ? nameOfPlayerOne : nameOfPlayerTwo;
     }
 
     private boolean checkForWinner() {
