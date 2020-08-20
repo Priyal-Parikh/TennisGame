@@ -33,6 +33,8 @@ public class TennisGame {
             translatedScore = TennisConstants.SCORE_LOVE;
         } else if (score == TennisConstants.ONE_POINT) {
             translatedScore = TennisConstants.SCORE_FIFTEEN;
+        } else if (score == TennisConstants.TWO_POINT) {
+            translatedScore = TennisConstants.SCORE_THIRTY;
         }
         return translatedScore;
     }

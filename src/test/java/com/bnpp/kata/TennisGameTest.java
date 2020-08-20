@@ -63,4 +63,14 @@ public class TennisGameTest{
 
         Assert.assertEquals(TennisConstants.SCORE_FIFTEEN+ TennisConstants.COLON +TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
     }
+
+    @Test
+    public void scoreShuldBeThirtyFifteenIfFirstPlayerScoresTwoAndSecondPlayerScoresOnePoint() {
+        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerOne());
+        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerOne());
+        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
+        tennisGame.getCurrentGameScore();
+
+        Assert.assertEquals(TennisConstants.SCORE_THIRTY+ TennisConstants.COLON +TennisConstants.SCORE_FIFTEEN,tennisGame.getCurrentGameScore());
+    }
 }
