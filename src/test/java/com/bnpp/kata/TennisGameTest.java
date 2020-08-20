@@ -57,20 +57,24 @@ public class TennisGameTest{
 
     @Test
     public void scoreShouldReturnFifteenAllIfBothPlayerWinsFirstPoint() {
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerOne());
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
+        prepareScoreCard(TennisConstants.ONE_POINT,TennisConstants.ONE_POINT);
         tennisGame.getCurrentGameScore();
 
         Assert.assertEquals(TennisConstants.SCORE_FIFTEEN+ TennisConstants.COLON +TennisConstants.TXT_ALL,tennisGame.getCurrentGameScore());
     }
 
     @Test
-    public void scoreShuldBeThirtyFifteenIfFirstPlayerScoresTwoAndSecondPlayerScoresOnePoint() {
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerOne());
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerOne());
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
+    public void scoreShouldBeThirtyFifteenIfFirstPlayerScoresTwoAndSecondPlayerScoresOnePoint() {
+        prepareScoreCard(TennisConstants.TWO_POINT,TennisConstants.ONE_POINT);
         tennisGame.getCurrentGameScore();
 
         Assert.assertEquals(TennisConstants.SCORE_THIRTY+ TennisConstants.COLON +TennisConstants.SCORE_FIFTEEN,tennisGame.getCurrentGameScore());
+    }
+
+    private void prepareScoreCard(int firstPlayerPoints, int secondPlayerPoints) {
+        for(int counter=0; counter<firstPlayerPoints; counter++)
+            tennisGame.increaseAPointForPlayer(NAME_OF_FIRST_PLAYER);
+        for(int counter=0; counter<secondPlayerPoints; counter++)
+            tennisGame.increaseAPointForPlayer(NAME_OF_SECOND_PLAYER);
     }
 }
