@@ -15,4 +15,6 @@ public class TennisConstants {
 
     public static final String SPACE_CHAR = " ";
     public static final String COLON = ":";
+
+    public static final String[] TENNIS_SCORE_LIST = {SCORE_LOVE,SCORE_FIFTEEN,SCORE_THIRTY,SCORE_FORTY};
 }

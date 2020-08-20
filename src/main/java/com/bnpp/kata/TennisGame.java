@@ -27,18 +27,7 @@ public class TennisGame {
     }
 
     private String translateScoreInWord(int score) {
-        String translatedScore="";
-
-        if (score == TennisConstants.ZERO_POINT) {
-            translatedScore = TennisConstants.SCORE_LOVE;
-        } else if (score == TennisConstants.ONE_POINT) {
-            translatedScore = TennisConstants.SCORE_FIFTEEN;
-        } else if (score == TennisConstants.TWO_POINT) {
-            translatedScore = TennisConstants.SCORE_THIRTY;
-        } else if (score == TennisConstants.THREE_POINT) {
-            translatedScore = TennisConstants.SCORE_FORTY;
-        }
-        return translatedScore;
+        return TennisConstants.TENNIS_SCORE_LIST[score];
     }
 
     public void increaseAPointForPlayer(String pointWinnerPlayer) {
