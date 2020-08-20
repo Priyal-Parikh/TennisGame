@@ -20,6 +20,10 @@ public class TennisGame {
         if(checkForAdvantage())
             return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+(pointsScoredByFirstPlayer>pointsScoredBySecondPlayer?nameOfPlayerOne:nameOfPlayerTwo);
 
+        if (checkForWinner()) {
+            return TennisConstants.SCORE_WINS+TennisConstants.COLON+(pointsScoredByFirstPlayer>pointsScoredBySecondPlayer?nameOfPlayerOne:nameOfPlayerTwo);
+        }
+
         String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
         String secondPlayerTranslatedScore=translateScoreInWord(getPointsScoredBySecondPlayer());
         String currentGameScore;
@@ -30,6 +34,12 @@ public class TennisGame {
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
 
         return currentGameScore;
+    }
+
+    private boolean checkForWinner() {
+        if(pointsScoredBySecondPlayer > TennisConstants.THREE_POINT && pointsScoredBySecondPlayer >= pointsScoredByFirstPlayer + TennisConstants.TWO_POINT)
+            return true;
+        else return pointsScoredByFirstPlayer > TennisConstants.THREE_POINT && pointsScoredByFirstPlayer >= pointsScoredBySecondPlayer + TennisConstants.TWO_POINT;
     }
 
     private boolean checkForAdvantage() {
