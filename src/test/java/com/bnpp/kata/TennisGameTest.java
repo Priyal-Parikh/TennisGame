@@ -77,15 +77,15 @@ public class TennisGameTest{
 
     @Test
     @Parameters({
-            "1, 0, Fifteen:Love",
-            "1, 1, Fifteen:All",
-            "2, 0, Thirty:Love",
-            "3, 1, Forty:Fifteen",
-            "3, 2, Forty:Thirty",
-            "0, 3, Love:Forty",
-            "1, 3, Fifteen:Forty",
-            "2, 3, Thirty:Forty",
-            "3, 3, Forty:All"
+            "1, 0, FIFTEEN:LOVE",
+            "1, 1, FIFTEEN:All",
+            "2, 0, THIRTY:LOVE",
+            "3, 1, FORTY:FIFTEEN",
+            "3, 2, FORTY:THIRTY",
+            "0, 3, LOVE:FORTY",
+            "1, 3, FIFTEEN:FORTY",
+            "2, 3, THIRTY:FORTY",
+            "3, 3, FORTY:All"
     })
     public void outputScoreShouldBeAsPerParametersPassed(int firstPlayerPoints,int secondPlayerPoints, String currentGameScore) {
         prepareScoreCard(firstPlayerPoints,secondPlayerPoints);

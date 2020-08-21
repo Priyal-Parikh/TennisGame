@@ -24,15 +24,15 @@ public class TennisGame {
             return TennisConstants.SCORE_WINS+TennisConstants.COLON+ getPlayerWithHighScore();
         }
 
-        String firstPlayerTranslatedScore=translateScoreInWord(getPointsScoredByFirstPlayer());
-        String secondPlayerTranslatedScore=translateScoreInWord(getPointsScoredBySecondPlayer());
+        TennisScoreEnum firstPlayerTranslatedScore= translateScoreForTennisFormat(getPointsScoredByFirstPlayer());
+        TennisScoreEnum secondPlayerTranslatedScore= translateScoreForTennisFormat(getPointsScoredBySecondPlayer());
         String currentGameScore;
 
-        if(isSamePointsScored(firstPlayerTranslatedScore, secondPlayerTranslatedScore))
+        if(isSamePointsScored())
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + TennisConstants.TXT_ALL;
         else
             currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
-
+    ///Use conditional operators instead of if else....--use format it so its readable
         return currentGameScore;
     }
 
@@ -47,15 +47,15 @@ public class TennisGame {
     }
 
     private boolean checkForAdvantage() {
-        return hasAnyPlayerScoreBeyondForty() && singlePointDifference();
+        return hasAnyPlayerScoreBeyondForty() && isSinglePointDifference();
     }
 
-    private boolean singlePointDifference() {
+    private boolean isSinglePointDifference() {
         return Math.abs(pointsScoredBySecondPlayer-pointsScoredByFirstPlayer)== TennisConstants.ONE_POINT;
     }
 
-    private boolean isSamePointsScored(String firstPlayerTranslatedScore, String secondPlayerTranslatedScore) {
-        return firstPlayerTranslatedScore.equalsIgnoreCase(secondPlayerTranslatedScore);
+    private boolean isSamePointsScored() {
+        return pointsScoredByFirstPlayer==pointsScoredBySecondPlayer;
     }
 
     private boolean hasAnyPlayerScoreBeyondForty() {
@@ -63,11 +63,11 @@ public class TennisGame {
     }
 
     private boolean checkForDeuce() {
-        return getPointsScoredByFirstPlayer() > TennisConstants.THREE_POINT && getPointsScoredByFirstPlayer() == getPointsScoredBySecondPlayer();
+        return getPointsScoredByFirstPlayer() > TennisConstants.THREE_POINT && isSamePointsScored();
     }
 
-    private String translateScoreInWord(int score) {
-        return TennisConstants.TENNIS_SCORE_LIST[score];
+    private TennisScoreEnum translateScoreForTennisFormat(int score) {
+        return TennisScoreEnum.fromScore(score);
     }
 
     public void increaseAPointForPlayer(String pointWinnerPlayer) {
