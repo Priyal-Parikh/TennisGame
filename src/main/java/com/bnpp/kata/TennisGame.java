@@ -14,26 +14,34 @@ public class TennisGame {
     }
 
     public String getCurrentGameScore() {
-        if(checkForDeuce())
-            return TennisConstants.SCORE_DEUCE;
-
-        if(checkForAdvantage())
-            return TennisConstants.SCORE_ADVANTAGE+TennisConstants.COLON+(getPlayerWithHighScore());
-
-        if (checkForWinner()) {
-            return TennisConstants.SCORE_WINS+TennisConstants.COLON+ getPlayerWithHighScore();
-        }
-
-        TennisScoreEnum firstPlayerTranslatedScore= translateScoreForTennisFormat(getPointsScoredByFirstPlayer());
-        TennisScoreEnum secondPlayerTranslatedScore= translateScoreForTennisFormat(getPointsScoredBySecondPlayer());
         String currentGameScore;
 
-        if(isSamePointsScored())
-            currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + TennisConstants.TXT_ALL;
-        else
-            currentGameScore = firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
-    ///Use conditional operators instead of if else....--use format it so its readable
+        if(checkForDeuce()) {
+            currentGameScore = TennisConstants.SCORE_DEUCE;
+        }
+
+        else if(checkForAdvantage()) {
+            currentGameScore = TennisConstants.SCORE_ADVANTAGE + TennisConstants.COLON + (getPlayerWithHighScore());
+        }
+
+        else if (checkForWinner()) {
+            currentGameScore=TennisConstants.SCORE_WINS+TennisConstants.COLON+ getPlayerWithHighScore();
+        }
+
+        else {
+            currentGameScore = convertScore();
+        }
+
         return currentGameScore;
+    }
+
+    private String convertScore() {
+        TennisScoreEnum firstPlayerTranslatedScore = translateScoreForTennisFormat(getPointsScoredByFirstPlayer());
+        TennisScoreEnum secondPlayerTranslatedScore = translateScoreForTennisFormat(getPointsScoredBySecondPlayer());
+
+        return isSamePointsScored() ?
+                firstPlayerTranslatedScore + TennisConstants.COLON + TennisConstants.TXT_ALL :
+                firstPlayerTranslatedScore + TennisConstants.COLON + secondPlayerTranslatedScore;
     }
 
     private String getPlayerWithHighScore() {
@@ -71,10 +79,12 @@ public class TennisGame {
     }
 
     public void increaseAPointForPlayer(String pointWinnerPlayer) {
-        if(pointWinnerPlayer.equalsIgnoreCase(getNameOfPlayerOne()))
-            pointsScoredByFirstPlayer++;
-        else if(pointWinnerPlayer.equalsIgnoreCase(getNameOfPlayerTwo()))
-            pointsScoredBySecondPlayer++;
+        if(pointWinnerPlayer!=null && !"".equals(pointWinnerPlayer)) {
+            if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerOne))
+                pointsScoredByFirstPlayer++;
+            else if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerTwo))
+                pointsScoredBySecondPlayer++;
+        }
     }
 
     public String getNameOfPlayerOne() {
