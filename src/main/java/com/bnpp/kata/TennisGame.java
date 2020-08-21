@@ -98,7 +98,7 @@ public class TennisGame {
     }
 
     private boolean checkForDeuce() {
-        return getPointsScoredByFirstPlayer() > TennisConstants.THREE_POINT && isSamePointsScored();
+        return getPointsScoredByFirstPlayer() > TennisConstants.TWO_POINT && isSamePointsScored();
     }
 
     private TennisScoreEnum translateScoreForTennisFormat(int score) {

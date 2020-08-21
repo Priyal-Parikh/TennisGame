@@ -84,8 +84,7 @@ public class TennisGameTest{
             "3, 2, FORTY:THIRTY",
             "0, 3, LOVE:FORTY",
             "1, 3, FIFTEEN:FORTY",
-            "2, 3, THIRTY:FORTY",
-            "3, 3, FORTY:All"
+            "2, 3, THIRTY:FORTY"
     })
     public void outputScoreShouldBeAsPerParametersPassed(int firstPlayerPoints,int secondPlayerPoints, String currentGameScore) {
         prepareScoreCard(firstPlayerPoints,secondPlayerPoints);
