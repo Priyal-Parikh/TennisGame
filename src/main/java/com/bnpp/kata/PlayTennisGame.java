@@ -29,9 +29,7 @@ public class PlayTennisGame {
 
             TennisGame tennisGame = new TennisGame(firstPlayer, secondPlayer);
             boolean isGameEnded = false;
-            String gameScore = tennisGame.getCurrentGameScore();
-            System.out.println(gameScore);
-            System.out.println("------------------------------");
+            displayScoreBoard(tennisGame);
 
             while (!isGameEnded) {
                 System.out.print("Point won by player :");
@@ -39,12 +37,9 @@ public class PlayTennisGame {
 
                 if (validPlayerName(inputPlayer)) {
                     tennisGame.increaseAPointForPlayer(inputPlayer);
+                    displayScoreBoard(tennisGame);
 
-                    gameScore = tennisGame.getCurrentGameScore();
-                    System.out.println(gameScore);
-                    System.out.println("------------------------------");
-
-                    isGameEnded = gameScore.contains(TennisConstants.SCORE_WINS);
+                    isGameEnded = tennisGame.getCurrentGameScore().contains(TennisConstants.SCORE_WINS);
                 } else
                     System.out.println("Kindly enter correct player name.");
             }
@@ -54,6 +49,12 @@ public class PlayTennisGame {
         {
             System.out.println("Player names cannot be same.");
         }
+    }
+
+    private static void displayScoreBoard(TennisGame tennisGame) {
+        String gameScore = tennisGame.getCurrentGameScore();
+        System.out.println(gameScore);
+        System.out.println("------------------------------");
     }
 
     private static boolean isDifferentPlayerNames() {
