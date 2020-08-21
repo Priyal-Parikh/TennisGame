@@ -35,6 +35,31 @@ public class TennisGame {
         return currentGameScore;
     }
 
+    public void increaseAPointForPlayer(String pointWinnerPlayer) {
+        if(pointWinnerPlayer!=null && !"".equals(pointWinnerPlayer)) {
+            if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerOne))
+                pointsScoredByFirstPlayer++;
+            else if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerTwo))
+                pointsScoredBySecondPlayer++;
+        }
+    }
+
+    public String getNameOfPlayerOne() {
+        return nameOfPlayerOne;
+    }
+
+    public String getNameOfPlayerTwo() {
+        return nameOfPlayerTwo;
+    }
+
+    public int getPointsScoredByFirstPlayer() {
+        return pointsScoredByFirstPlayer;
+    }
+
+    public int getPointsScoredBySecondPlayer() {
+        return pointsScoredBySecondPlayer;
+    }
+
     private String convertScore() {
         TennisScoreEnum firstPlayerTranslatedScore = translateScoreForTennisFormat(getPointsScoredByFirstPlayer());
         TennisScoreEnum secondPlayerTranslatedScore = translateScoreForTennisFormat(getPointsScoredBySecondPlayer());
@@ -49,9 +74,11 @@ public class TennisGame {
     }
 
     private boolean checkForWinner() {
-        if(pointsScoredBySecondPlayer > TennisConstants.THREE_POINT && pointsScoredBySecondPlayer >= pointsScoredByFirstPlayer + TennisConstants.TWO_POINT)
-            return true;
-        else return pointsScoredByFirstPlayer > TennisConstants.THREE_POINT && pointsScoredByFirstPlayer >= pointsScoredBySecondPlayer + TennisConstants.TWO_POINT;
+        return pointsScoredBySecondPlayer > TennisConstants.THREE_POINT && isPointDifferenceTwoOrMore() || (pointsScoredByFirstPlayer > TennisConstants.THREE_POINT && isPointDifferenceTwoOrMore());
+    }
+
+    private boolean isPointDifferenceTwoOrMore() {
+        return Math.abs(pointsScoredBySecondPlayer-pointsScoredByFirstPlayer) >= TennisConstants.TWO_POINT;
     }
 
     private boolean checkForAdvantage() {
@@ -76,30 +103,5 @@ public class TennisGame {
 
     private TennisScoreEnum translateScoreForTennisFormat(int score) {
         return TennisScoreEnum.fromScore(score);
-    }
-
-    public void increaseAPointForPlayer(String pointWinnerPlayer) {
-        if(pointWinnerPlayer!=null && !"".equals(pointWinnerPlayer)) {
-            if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerOne))
-                pointsScoredByFirstPlayer++;
-            else if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerTwo))
-                pointsScoredBySecondPlayer++;
-        }
-    }
-
-    public String getNameOfPlayerOne() {
-        return nameOfPlayerOne;
-    }
-
-    public String getNameOfPlayerTwo() {
-        return nameOfPlayerTwo;
-    }
-
-    public int getPointsScoredByFirstPlayer() {
-        return pointsScoredByFirstPlayer;
-    }
-
-    public int getPointsScoredBySecondPlayer() {
-        return pointsScoredBySecondPlayer;
     }
 }
