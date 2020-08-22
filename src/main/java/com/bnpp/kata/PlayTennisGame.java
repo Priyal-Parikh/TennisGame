@@ -37,6 +37,7 @@ public class PlayTennisGame {
 
                 if (tennisGame.isInvalidPlayerName(inputPlayer)) {
                     System.out.println("Kindly enter correct player name.");
+                    displayScoreBoard(tennisGame);
                 } else {
                     tennisGame.increaseAPointForPlayer(inputPlayer);
                     displayScoreBoard(tennisGame);
