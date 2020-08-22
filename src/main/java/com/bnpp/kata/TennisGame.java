@@ -15,20 +15,17 @@ public class TennisGame {
     }
 
     public String getCurrentGameScore() {
-        if(checkForDeuce()) {
+        if (checkForDeuce()) {
             return TennisConstants.SCORE_DEUCE;
-        }
-        else if(checkForAdvantage()) {
+        } else if (checkForAdvantage()) {
             return TennisConstants.SCORE_ADVANTAGE + TennisConstants.COLON + (getPlayerWithHighScore());
-        }
-        else if (checkForWinner()) {
-            return TennisConstants.SCORE_WINS+TennisConstants.COLON+ getPlayerWithHighScore();
-        }
-        else return convertScore();
+        } else if (checkForWinner()) {
+            return TennisConstants.SCORE_WINS + TennisConstants.COLON + getPlayerWithHighScore();
+        } else return convertScore();
     }
 
     public void increaseAPointForPlayer(String pointWinnerPlayer) {
-        if(isInvalidPlayerName(pointWinnerPlayer)) throw new TennisException("Incorrect Player Name");
+        if (isInvalidPlayerName(pointWinnerPlayer)) throw new TennisException("Incorrect Player Name");
         if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerOne))
             pointsScoredByFirstPlayer++;
         else pointsScoredBySecondPlayer++;
@@ -76,7 +73,7 @@ public class TennisGame {
     }
 
     private boolean isPointDifferenceTwoOrMore() {
-        return Math.abs(pointsScoredBySecondPlayer-pointsScoredByFirstPlayer) >= TennisConstants.TWO_POINT;
+        return Math.abs(pointsScoredBySecondPlayer - pointsScoredByFirstPlayer) >= TennisConstants.TWO_POINT;
     }
 
     private boolean checkForAdvantage() {
@@ -84,11 +81,11 @@ public class TennisGame {
     }
 
     private boolean isSinglePointDifference() {
-        return Math.abs(pointsScoredBySecondPlayer-pointsScoredByFirstPlayer)== TennisConstants.ONE_POINT;
+        return Math.abs(pointsScoredBySecondPlayer - pointsScoredByFirstPlayer) == TennisConstants.ONE_POINT;
     }
 
     private boolean isSamePointsScored() {
-        return pointsScoredByFirstPlayer==pointsScoredBySecondPlayer;
+        return pointsScoredByFirstPlayer == pointsScoredBySecondPlayer;
     }
 
     private boolean hasAnyPlayerScoreBeyondForty() {
