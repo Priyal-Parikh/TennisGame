@@ -1,6 +1,7 @@
 package com.bnpp.kata;
 
 import com.bnpp.kata.constants.TennisConstants;
+import com.bnpp.kata.entity.TennisPlayer;
 import com.bnpp.kata.exception.TennisException;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -24,7 +25,7 @@ public class TennisGameTest{
 
     @Before
     public void initialSetup() {
-        tennisGame=new TennisGame(NAME_OF_FIRST_PLAYER,"Maria Sharapova");
+        tennisGame=new TennisGame(NAME_OF_FIRST_PLAYER,NAME_OF_SECOND_PLAYER);
     }
 
     @Test
@@ -34,8 +35,8 @@ public class TennisGameTest{
 
     @Test
     public void startNewGameWithTwoPlayers() {
-        Assert.assertEquals(NAME_OF_FIRST_PLAYER, tennisGame.getNameOfPlayerOne());
-        Assert.assertEquals(NAME_OF_SECOND_PLAYER, tennisGame.getNameOfPlayerTwo());
+        Assert.assertEquals(NAME_OF_FIRST_PLAYER, tennisGame.firstPlayer.getNameOfPlayer());
+        Assert.assertEquals(NAME_OF_SECOND_PLAYER, tennisGame.secondPlayer.getNameOfPlayer());
     }
 
     @Test
@@ -45,16 +46,16 @@ public class TennisGameTest{
 
     @Test
     public void firstPlayerScoreShouldIncreaseAfterWinningAPoint() {
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerOne());
+        tennisGame.increaseAPointForPlayer(tennisGame.firstPlayer.getNameOfPlayer());
 
-        Assert.assertEquals(TennisConstants.ONE_POINT,tennisGame.getPointsScoredByFirstPlayer());
+        Assert.assertEquals(TennisConstants.ONE_POINT,tennisGame.firstPlayer.getPointsScoredByPlayer());
     }
 
     @Test
     public void secondPlayerScoreShouldIncreaseAfterWinningAPoint() {
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
+        tennisGame.increaseAPointForPlayer(tennisGame.secondPlayer.getNameOfPlayer());
 
-        Assert.assertEquals(TennisConstants.ONE_POINT,tennisGame.getPointsScoredBySecondPlayer());
+        Assert.assertEquals(TennisConstants.ONE_POINT,tennisGame.secondPlayer.getPointsScoredByPlayer());
     }
 
     @Test
@@ -67,7 +68,7 @@ public class TennisGameTest{
 
     @Test
     public void scoreShouldBeLoveFifteenIfSecondPlayerScoresPoint() {
-        tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
+        tennisGame.increaseAPointForPlayer(tennisGame.secondPlayer.getNameOfPlayer());
         tennisGame.getCurrentGameScore();
 
         Assert.assertEquals(TennisConstants.SCORE_LOVE+ TennisConstants.COLON +TennisConstants.SCORE_FIFTEEN,tennisGame.getCurrentGameScore());

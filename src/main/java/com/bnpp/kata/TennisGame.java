@@ -1,17 +1,16 @@
 package com.bnpp.kata;
 
 import com.bnpp.kata.constants.TennisConstants;
+import com.bnpp.kata.entity.TennisPlayer;
 import com.bnpp.kata.exception.TennisException;
 
 public class TennisGame {
-    private String nameOfPlayerOne;
-    private String nameOfPlayerTwo;
-    private int pointsScoredByFirstPlayer;
-    private int pointsScoredBySecondPlayer;
+    TennisPlayer firstPlayer;
+    TennisPlayer secondPlayer;
 
     public TennisGame(String nameOfPlayerOne, String nameOfPlayerTwo) {
-        this.nameOfPlayerOne = nameOfPlayerOne;
-        this.nameOfPlayerTwo = nameOfPlayerTwo;
+        firstPlayer=new TennisPlayer(nameOfPlayerOne);
+        secondPlayer=new TennisPlayer(nameOfPlayerTwo);
     }
 
     public String getCurrentGameScore() {
@@ -26,34 +25,18 @@ public class TennisGame {
 
     public void increaseAPointForPlayer(String pointWinnerPlayer) {
         if (isInvalidPlayerName(pointWinnerPlayer)) throw new TennisException("Incorrect Player Name");
-        if (pointWinnerPlayer.equalsIgnoreCase(nameOfPlayerOne))
-            pointsScoredByFirstPlayer++;
-        else pointsScoredBySecondPlayer++;
+        if (pointWinnerPlayer.equalsIgnoreCase(firstPlayer.getNameOfPlayer()))
+            firstPlayer.setPointsScoredByPlayer(firstPlayer.getPointsScoredByPlayer()+TennisConstants.ONE_POINT);
+        else secondPlayer.setPointsScoredByPlayer(secondPlayer.getPointsScoredByPlayer()+TennisConstants.ONE_POINT);
     }
 
     public boolean isInvalidPlayerName(String inputPlayer) {
-        return !isPlayerNameNotNull(inputPlayer) || (!inputPlayer.equalsIgnoreCase(nameOfPlayerOne) && (!inputPlayer.equalsIgnoreCase(nameOfPlayerTwo)));
-    }
-
-    public String getNameOfPlayerOne() {
-        return nameOfPlayerOne;
-    }
-
-    public String getNameOfPlayerTwo() {
-        return nameOfPlayerTwo;
-    }
-
-    public int getPointsScoredByFirstPlayer() {
-        return pointsScoredByFirstPlayer;
-    }
-
-    public int getPointsScoredBySecondPlayer() {
-        return pointsScoredBySecondPlayer;
+        return !isPlayerNameNotNull(inputPlayer) || (!inputPlayer.equalsIgnoreCase(firstPlayer.getNameOfPlayer()) && (!inputPlayer.equalsIgnoreCase(secondPlayer.getNameOfPlayer())));
     }
 
     private String convertScore() {
-        TennisScoreEnum firstPlayerTranslatedScore = translateScoreForTennisFormat(getPointsScoredByFirstPlayer());
-        TennisScoreEnum secondPlayerTranslatedScore = translateScoreForTennisFormat(getPointsScoredBySecondPlayer());
+        TennisScoreEnum firstPlayerTranslatedScore = translateScoreForTennisFormat(firstPlayer.getPointsScoredByPlayer());
+        TennisScoreEnum secondPlayerTranslatedScore = translateScoreForTennisFormat(secondPlayer.getPointsScoredByPlayer());
 
         return isSamePointsScored() ?
                 firstPlayerTranslatedScore.score + TennisConstants.COLON + TennisConstants.TXT_ALL :
@@ -65,7 +48,7 @@ public class TennisGame {
     }
 
     private String getPlayerWithHighScore() {
-        return pointsScoredByFirstPlayer > pointsScoredBySecondPlayer ? nameOfPlayerOne : nameOfPlayerTwo;
+        return firstPlayer.getPointsScoredByPlayer() > secondPlayer.getPointsScoredByPlayer() ? firstPlayer.getNameOfPlayer() : secondPlayer.getNameOfPlayer();
     }
 
     private boolean checkForWinner() {
@@ -73,7 +56,7 @@ public class TennisGame {
     }
 
     private boolean isPointDifferenceTwoOrMore() {
-        return Math.abs(pointsScoredBySecondPlayer - pointsScoredByFirstPlayer) >= TennisConstants.TWO_POINT;
+        return Math.abs(secondPlayer.getPointsScoredByPlayer() - firstPlayer.getPointsScoredByPlayer()) >= TennisConstants.TWO_POINT;
     }
 
     private boolean checkForAdvantage() {
@@ -81,19 +64,19 @@ public class TennisGame {
     }
 
     private boolean isSinglePointDifference() {
-        return Math.abs(pointsScoredBySecondPlayer - pointsScoredByFirstPlayer) == TennisConstants.ONE_POINT;
+        return Math.abs(secondPlayer.getPointsScoredByPlayer() - firstPlayer.getPointsScoredByPlayer()) == TennisConstants.ONE_POINT;
     }
 
     private boolean isSamePointsScored() {
-        return pointsScoredByFirstPlayer == pointsScoredBySecondPlayer;
+        return firstPlayer.getPointsScoredByPlayer() == secondPlayer.getPointsScoredByPlayer();
     }
 
     private boolean hasAnyPlayerScoreBeyondForty() {
-        return pointsScoredByFirstPlayer > TennisConstants.THREE_POINT || pointsScoredBySecondPlayer > TennisConstants.THREE_POINT;
+        return firstPlayer.getPointsScoredByPlayer() > TennisConstants.THREE_POINT || secondPlayer.getPointsScoredByPlayer() > TennisConstants.THREE_POINT;
     }
 
     private boolean checkForDeuce() {
-        return getPointsScoredByFirstPlayer() > TennisConstants.TWO_POINT && isSamePointsScored();
+        return firstPlayer.getPointsScoredByPlayer() > TennisConstants.TWO_POINT && isSamePointsScored();
     }
 
     private TennisScoreEnum translateScoreForTennisFormat(int score) {
