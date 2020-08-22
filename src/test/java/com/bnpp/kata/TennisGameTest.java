@@ -1,11 +1,14 @@
 package com.bnpp.kata;
 
 import com.bnpp.kata.constants.TennisConstants;
+import com.bnpp.kata.exception.TennisException;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNotNull;
@@ -15,6 +18,9 @@ public class TennisGameTest{
     public static final String NAME_OF_FIRST_PLAYER = "Serena Williams";
     public static final String NAME_OF_SECOND_PLAYER = "Maria Sharapova";
     TennisGame tennisGame;
+
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
 
     @Before
     public void initialSetup() {
@@ -52,6 +58,14 @@ public class TennisGameTest{
     }
 
     @Test
+    public void scoreShouldThrowAnExceptionIfNameIfNotCorrect() {
+        exceptionRule.expect(TennisException.class);
+        exceptionRule.expectMessage("Incorrect Player Name");
+
+        tennisGame.increaseAPointForPlayer("RANDOM PLAYER");
+    }
+
+    @Test
     public void scoreShouldBeLoveFifteenIfSecondPlayerScoresPoint() {
         tennisGame.increaseAPointForPlayer(tennisGame.getNameOfPlayerTwo());
         tennisGame.getCurrentGameScore();
@@ -77,14 +91,14 @@ public class TennisGameTest{
 
     @Test
     @Parameters({
-            "1, 0, FIFTEEN:LOVE",
-            "1, 1, FIFTEEN:All",
-            "2, 0, THIRTY:LOVE",
-            "3, 1, FORTY:FIFTEEN",
-            "3, 2, FORTY:THIRTY",
-            "0, 3, LOVE:FORTY",
-            "1, 3, FIFTEEN:FORTY",
-            "2, 3, THIRTY:FORTY"
+            "1, 0, Fifteen:Love",
+            "1, 1, Fifteen:All",
+            "2, 0, Thirty:Love",
+            "3, 1, Forty:Fifteen",
+            "3, 2, Forty:Thirty",
+            "0, 3, Love:Forty",
+            "1, 3, Fifteen:Forty",
+            "2, 3, Thirty:Forty"
     })
     public void outputScoreShouldBeAsPerParametersPassed(int firstPlayerPoints,int secondPlayerPoints, String currentGameScore) {
         prepareScoreCard(firstPlayerPoints,secondPlayerPoints);

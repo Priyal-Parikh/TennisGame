@@ -35,13 +35,14 @@ public class PlayTennisGame {
                 System.out.print("Point won by player :");
                 String inputPlayer = scanner.nextLine();
 
-                if (validPlayerName(inputPlayer)) {
+                if (tennisGame.isInvalidPlayerName(inputPlayer)) {
+                    System.out.println("Kindly enter correct player name.");
+                } else {
                     tennisGame.increaseAPointForPlayer(inputPlayer);
                     displayScoreBoard(tennisGame);
 
                     isGameEnded = tennisGame.getCurrentGameScore().contains(TennisConstants.SCORE_WINS);
-                } else
-                    System.out.println("Kindly enter correct player name.");
+                }
             }
             System.out.println("Game is now ended");
         }
@@ -63,10 +64,6 @@ public class PlayTennisGame {
 
     private static boolean isPlayerNamesNotNull() {
         return !(null == firstPlayer) && !("".equals(firstPlayer)) && !(null == secondPlayer) && !("".equals(secondPlayer));
-    }
-
-    private static boolean validPlayerName(String inputPlayer) {
-        return isPlayerNamesNotNull() && (inputPlayer.equalsIgnoreCase(firstPlayer) || (inputPlayer.equalsIgnoreCase(secondPlayer)));
     }
 
 }
